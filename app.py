@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import sessionmaker
 #sessionmaker(bind=create_engine(classes.db_url, poolclass=NullPool))
 #session = scoped_session()
 
@@ -31,8 +32,10 @@ Samples = Base.classes.samples
 Sample_metadata = Base.classes.sample_metadata
 
 #Creates Session
-session = Session(engine)
+#session = Session(engine)
 #session = scoped_session(engine)
+session = scoped_session(sessionmaker(bind=engine))
+
 
 #Creates the dashboard home route (renders HTML template)
 @app.route("/")
